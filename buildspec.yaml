@@ -17,4 +17,6 @@ artifacts:
   files:
     - '*.json'
     - main/*
-
+    - appspec.yml
+    - codedeploy-scripts/*
+    - nginx/*

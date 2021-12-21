@@ -1,0 +1,52 @@
+# https://docs.aws.amazon.com/codedeploy/latest/userguide/reference-appspec-file.html#appspec-reference-server
+version: 0.0
+os: linux
+# https://docs.aws.amazon.com/codedeploy/latest/userguide/reference-appspec-file-structure-files.html
+files:
+ - source: /
+   destination: /var/app/current/
+# https://docs.aws.amazon.com/codedeploy/latest/userguide/reference-appspec-file-structure-permissions.html
+permissions:
+  - object: /var/app
+    pattern: current
+#    except: exception-specification
+    owner: ec2-user
+    group: ec2-user
+    mode: "0744"
+#    acls: 
+#      - acls-specification 
+#    context:
+#      user: user-specification
+#      type: type-specification
+#      range: range-specification
+    type:
+      - directory
+  - object: /var/app/current
+    pattern: "**"
+    owner: ec2-user
+    group: ec2-user
+    type:
+      - file
+      - directory
+# https://docs.aws.amazon.com/codedeploy/latest/userguide/reference-appspec-file-structure-hooks.html#appspec-hooks-server
+hooks:
+  ApplicationStop:
+    - location: codedeploy-scripts/application_stop.sh
+      timeout: 300
+      runas: ec2-user
+  BeforeInstall:
+    - location: codedeploy-scripts/before_install.sh
+      timeout: 300
+      runas: root
+  AfterInstall:
+    - location: codedeploy-scripts/after_install.sh
+      timeout: 300
+      runas: ec2-user
+  ApplicationStart:
+    - location: codedeploy-scripts/application_start.sh
+      timeout: 300
+      runas: ec2-user
+    - location: codedeploy-scripts/nginx-setup.sh
+      timeout: 300
+      runas: root
+
