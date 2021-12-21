@@ -1,0 +1,20 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 14
+    commands:
+      - npm install
+  build:
+    commands:
+      - npm test
+  post_build:
+    commands:
+      - echo The build completed on $(date).
+
+artifacts:
+  files:
+    - '*.json'
+    - main/*
+

@@ -2,6 +2,9 @@
 A sample Node.js web application with AWS CodeBuild [1] build specification [2] and 
 AWS CodeDeploy [3] application specification [4] integrated into CodePipeline [5].
 
+## AWS CodeBuild
+For information related to the build see `buildspec.yaml`.
+
 ## Reference
 - [1] https://docs.aws.amazon.com/codebuild/latest/userguide/welcome.html
 - [2] https://docs.aws.amazon.com/codebuild/latest/userguide/build-spec-ref.html
